@@ -2,270 +2,226 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Lunch Count</title>
+<meta charset="UTF-8">
 
-    <style>
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
 
-        * {
-            box-sizing: border-box;
-        }
+<title>Lunch Count</title>
 
-        body {
-            margin: 0;
-            font-family: Arial, Helvetica, sans-serif;
-            background: #f4f6f8;
-            color: #1f2937;
-        }
 
-        header {
-            background: #123c69;
-            color: white;
-            padding: 28px 40px;
-        }
+<style>
 
-        header h1 {
-            margin: 0;
-            font-size: 34px;
-        }
+* {
+    box-sizing: border-box;
+}
 
-        header p {
-            margin: 6px 0 0;
-            font-size: 17px;
-            opacity: 0.9;
-        }
+body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    background: #f4f6f8;
+    color: #1f2937;
+}
 
-        .container {
-            max-width: 1200px;
-            margin: 40px auto;
-            padding: 0 20px;
-        }
+header {
+    background: #123c69;
+    color: white;
+    padding: 28px 40px;
+}
 
-        /* =========================
-           HOME
-        ========================= */
+header h1 {
+    margin: 0;
+    font-size: 34px;
+}
 
-        .home {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 30px;
-        }
+header p {
+    margin: 6px 0 0;
+    opacity: .9;
+}
 
-        .building-card {
-            background: white;
-            border-radius: 16px;
-            padding: 50px 30px;
-            text-align: center;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
-            cursor: pointer;
-            transition: 0.2s;
-        }
+.container {
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
 
-        .building-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
-        }
 
-        .building-card h2 {
-            font-size: 30px;
-            margin: 0 0 12px;
-        }
+/* HOME */
 
-        .building-card p {
-            color: #6b7280;
-        }
+.home {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+}
 
-        .building-card button {
-            margin-top: 20px;
-            padding: 14px 28px;
-            border: none;
-            border-radius: 8px;
-            background: #123c69;
-            color: white;
-            font-size: 16px;
-            cursor: pointer;
-        }
+.building-card {
+    background: white;
+    border-radius: 16px;
+    padding: 55px 30px;
+    text-align: center;
+    box-shadow: 0 5px 20px rgba(0,0,0,.08);
+}
 
-        /* =========================
-           BUILDING PAGE
-        ========================= */
+.building-card h2 {
+    font-size: 30px;
+}
 
-        .page {
-            display: none;
-        }
+.building-card p {
+    color: #6b7280;
+}
 
-        .back {
-            background: none;
-            border: none;
-            color: #123c69;
-            font-size: 17px;
-            cursor: pointer;
-            margin-bottom: 20px;
-            padding: 0;
-        }
+.building-card button {
+    margin-top: 20px;
+    padding: 14px 30px;
+    border: none;
+    border-radius: 8px;
+    background: #123c69;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+}
 
-        .layout {
-            display: grid;
-            grid-template-columns: 380px 1fr;
-            gap: 30px;
-        }
 
-        .form-card,
-        .results-card {
-            background: white;
-            border-radius: 16px;
-            padding: 30px;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
-        }
+/* BUILDING */
 
-        .form-card h2,
-        .results-card h2 {
-            margin-top: 0;
-        }
+.page {
+    display: none;
+}
 
-        /* =========================
-           FORM
-        ========================= */
+.back {
+    background: none;
+    border: none;
+    color: #123c69;
+    font-size: 17px;
+    cursor: pointer;
+    margin-bottom: 20px;
+}
 
-        label {
-            display: block;
-            margin-top: 22px;
-            margin-bottom: 8px;
-            font-weight: bold;
-        }
+.layout {
+    display: grid;
+    grid-template-columns: 380px 1fr;
+    gap: 30px;
+}
 
-        select,
-        input {
-            width: 100%;
-            padding: 14px;
-            border: 1px solid #d1d5db;
-            border-radius: 8px;
-            font-size: 16px;
-            background: white;
-        }
+.form-card,
+.results-card {
+    background: white;
+    border-radius: 16px;
+    padding: 30px;
+    box-shadow: 0 5px 20px rgba(0,0,0,.08);
+}
 
-        select:focus,
-        input:focus {
-            outline: none;
-            border-color: #123c69;
-        }
 
-        .submit-btn {
-            width: 100%;
-            margin-top: 25px;
-            padding: 15px;
-            border: none;
-            border-radius: 8px;
-            background: #198754;
-            color: white;
-            font-size: 17px;
-            font-weight: bold;
-            cursor: pointer;
-        }
+/* FORM */
 
-        .submit-btn:hover {
-            background: #157347;
-        }
+label {
+    display: block;
+    margin-top: 22px;
+    margin-bottom: 8px;
+    font-weight: bold;
+}
 
-        .submit-btn:disabled {
-            opacity: 0.6;
-            cursor: not-allowed;
-        }
+select,
+input {
+    width: 100%;
+    padding: 14px;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    font-size: 16px;
+}
 
-        /* =========================
-           TOTAL
-        ========================= */
+.submit-btn {
+    width: 100%;
+    margin-top: 25px;
+    padding: 15px;
+    border: none;
+    border-radius: 8px;
+    background: #198754;
+    color: white;
+    font-size: 17px;
+    font-weight: bold;
+    cursor: pointer;
+}
 
-        .total {
-            font-size: 38px;
-            font-weight: bold;
-            margin: 15px 0 25px;
-            color: #123c69;
-        }
+.submit-btn:disabled {
+    opacity: .6;
+}
 
-        /* =========================
-           TABLE
-        ========================= */
 
-        table {
-            width: 100%;
-            border-collapse: collapse;
-        }
+/* TOTAL */
 
-        th,
-        td {
-            padding: 13px;
-            text-align: left;
-            border-bottom: 1px solid #e5e7eb;
-        }
+.total {
+    font-size: 38px;
+    font-weight: bold;
+    margin: 15px 0 25px;
+    color: #123c69;
+}
 
-        th {
-            background: #f8fafc;
-        }
 
-        td:last-child,
-        th:last-child {
-            text-align: right;
-        }
+/* TABLE */
 
-        /* =========================
-           MESSAGES
-        ========================= */
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
 
-        .message {
-            margin-top: 15px;
-            padding: 12px;
-            border-radius: 7px;
-            display: none;
-        }
+th,
+td {
+    padding: 13px;
+    border-bottom: 1px solid #e5e7eb;
+    text-align: left;
+}
 
-        .success {
-            background: #d1e7dd;
-            color: #0f5132;
-        }
+th {
+    background: #f8fafc;
+}
 
-        .error {
-            background: #f8d7da;
-            color: #842029;
-        }
+td:last-child,
+th:last-child {
+    text-align: right;
+}
 
-        .loading {
-            text-align: center;
-            padding: 20px;
-            color: #6b7280;
-        }
 
-        /* =========================
-           MOBILE
-        ========================= */
+/* MESSAGE */
 
-        @media (max-width: 800px) {
+.message {
+    margin-top: 15px;
+    padding: 12px;
+    border-radius: 7px;
+    display: none;
+}
 
-            .home {
-                grid-template-columns: 1fr;
-            }
+.success {
+    background: #d1e7dd;
+    color: #0f5132;
+}
 
-            .layout {
-                grid-template-columns: 1fr;
-            }
+.error {
+    background: #f8d7da;
+    color: #842029;
+}
 
-            header {
-                padding: 22px;
-            }
+.loading {
+    text-align: center;
+    padding: 20px;
+    color: #6b7280;
+}
 
-            header h1 {
-                font-size: 28px;
-            }
 
-            .container {
-                margin: 25px auto;
-            }
+@media (max-width: 800px) {
 
-        }
+    .home {
+        grid-template-columns: 1fr;
+    }
 
-    </style>
+    .layout {
+        grid-template-columns: 1fr;
+    }
+
+}
+
+</style>
 
 </head>
 
@@ -275,9 +231,9 @@
 
 <header>
 
-    <h1>Lunch Count</h1>
+<h1>Lunch Count</h1>
 
-    <p>Daily Student Lunch Count</p>
+<p>Daily Student Lunch Count</p>
 
 </header>
 
@@ -286,188 +242,179 @@
 <div class="container">
 
 
-    <!-- =========================================
-         HOME PAGE
-    ========================================== -->
+<!-- =========================
+     HOME
+========================= -->
 
-    <div id="homePage">
+<div id="homePage">
 
-        <div class="home">
+<div class="home">
 
 
-            <!-- BUILDING 1 -->
+<div class="building-card">
 
-            <div
-                class="building-card"
-                onclick="openBuilding(1)"
-            >
+<h2>Building 1</h2>
 
-                <h2>Building 1</h2>
+<p>
+Enter lunch count for Building 1
+</p>
 
-                <p>
-                    Enter lunch count for Building 1
-                </p>
+<button onclick="openBuilding(1)">
+Open Building 1
+</button>
 
-                <button>
-                    Open Building 1
-                </button>
+</div>
 
-            </div>
 
 
+<div class="building-card">
 
-            <!-- BUILDING 2 -->
+<h2>Building 2</h2>
 
-            <div
-                class="building-card"
-                onclick="openBuilding(2)"
-            >
+<p>
+Enter lunch count for Building 2
+</p>
 
-                <h2>Building 2</h2>
+<button onclick="openBuilding(2)">
+Open Building 2
+</button>
 
-                <p>
-                    Enter lunch count for Building 2
-                </p>
-
-                <button>
-                    Open Building 2
-                </button>
-
-            </div>
-
-
-        </div>
-
-    </div>
-
-
-
-    <!-- =========================================
-         BUILDING PAGE
-    ========================================== -->
-
-    <div
-        id="buildingPage"
-        class="page"
-    >
-
-
-        <button
-            class="back"
-            onclick="goHome()"
-        >
-            ← Back to Buildings
-        </button>
-
-
-
-        <div class="layout">
-
-
-            <!-- =================================
-                 LEFT - FORM
-            ================================== -->
-
-            <div class="form-card">
-
-
-                <h2 id="buildingTitle">
-                    Building 1
-                </h2>
-
-
-
-                <label>
-                    Teacher
-                </label>
-
-
-                <select id="teacherSelect">
-
-                    <option value="">
-                        Select your name
-                    </option>
-
-                </select>
-
-
-
-                <label>
-                    How many students need lunch?
-                </label>
-
-
-                <input
-                    type="number"
-                    id="lunchCount"
-                    min="0"
-                    step="1"
-                    placeholder="Example: 20"
-                >
-
-
-
-                <button
-                    class="submit-btn"
-                    id="submitButton"
-                    onclick="submitLunch()"
-                >
-                    SUBMIT
-                </button>
-
-
-
-                <div
-                    id="message"
-                    class="message"
-                ></div>
-
-
-            </div>
-
-
-
-            <!-- =================================
-                 RIGHT - RESULTS
-            ================================== -->
-
-            <div class="results-card">
-
-
-                <h2 id="resultsTitle">
-                    Building 1 Lunch Count
-                </h2>
-
-
-
-                <div class="total">
-
-                    Total:
-                    <span id="totalCount">0</span>
-
-                </div>
-
-
-
-                <div id="results">
-
-                    <div class="loading">
-                        Loading...
-                    </div>
-
-                </div>
-
-
-            </div>
-
-
-        </div>
-
-
-    </div>
+</div>
 
 
 </div>
+
+</div>
+
+
+
+<!-- =========================
+     BUILDING PAGE
+========================= -->
+
+<div id="buildingPage"
+     class="page">
+
+
+<button class="back"
+        onclick="goHome()">
+
+← Back to Buildings
+
+</button>
+
+
+
+<div class="layout">
+
+
+<!-- LEFT -->
+
+<div class="form-card">
+
+<h2 id="buildingTitle">
+Building 1
+</h2>
+
+
+<label>
+Teacher
+</label>
+
+
+<select id="teacherSelect">
+
+<option value="">
+Loading teachers...
+</option>
+
+</select>
+
+
+
+<label>
+How many students need lunch?
+</label>
+
+
+<input
+    type="number"
+    id="lunchCount"
+    min="0"
+    step="1"
+    placeholder="Example: 20"
+>
+
+
+
+<button
+    class="submit-btn"
+    id="submitButton"
+    onclick="submitLunch()">
+
+SUBMIT
+
+</button>
+
+
+<div id="message"
+     class="message">
+</div>
+
+
+</div>
+
+
+
+<!-- RIGHT -->
+
+<div class="results-card">
+
+
+<h2 id="resultsTitle">
+Building 1 Lunch Count
+</h2>
+
+
+<div class="total">
+
+Total:
+<span id="totalCount">
+0
+</span>
+
+</div>
+
+
+<div id="results">
+
+<div class="loading">
+Loading...
+</div>
+
+</div>
+
+
+</div>
+
+
+</div>
+
+
+</div>
+
+
+</div>
+
+
+
+<!-- Hidden iframe for submit -->
+
+<iframe
+    name="submitFrame"
+    id="submitFrame"
+    style="display:none;">
+</iframe>
 
 
 
@@ -475,16 +422,12 @@
 
 
 /* =========================================
-   GOOGLE APPS SCRIPT URL
+   NEW APPS SCRIPT URL
 ========================================= */
 
 const API_URL =
-"https://script.google.com/a/macros/seminolescience.net/s/AKfycbwI5WYmIqwG59abeEpW2ZKZTENXitBqwVtDQGnYqOryIK5dkr_E6RMHx1zX3Gajq-xA6Q/exec";
+"https://script.google.com/macros/s/AKfycbzmpz1R24ANxHIv8DNFdsuYRIUoVAzY_87e-kHu2d1kCGH3KodoXpqnHjYE2yZUEUGK/exec";
 
-
-/* =========================================
-   VARIABLES
-========================================= */
 
 let currentBuilding = null;
 
@@ -492,40 +435,37 @@ let allTeachers = [];
 
 let allLunchData = [];
 
+let jsonpCounter = 0;
 
 
 /* =========================================
    OPEN BUILDING
 ========================================= */
 
-function openBuilding(buildingNumber) {
+function openBuilding(building) {
+
+    currentBuilding =
+        String(building);
 
 
-    currentBuilding = String(buildingNumber);
+    document.getElementById("homePage")
+        .style.display = "none";
 
 
-    document.getElementById("homePage").style.display =
-        "none";
+    document.getElementById("buildingPage")
+        .style.display = "block";
 
 
-    document.getElementById("buildingPage").style.display =
-        "block";
+    document.getElementById("buildingTitle")
+        .innerText =
+        "Building " + building;
 
 
-    document.getElementById("buildingTitle").innerText =
-        "Building " + buildingNumber;
-
-
-    document.getElementById("resultsTitle").innerText =
-        "Building " + buildingNumber + " Lunch Count";
-
-
-    document.getElementById("totalCount").innerText =
-        "0";
-
-
-    document.getElementById("results").innerHTML =
-        '<div class="loading">Loading...</div>';
+    document.getElementById("resultsTitle")
+        .innerText =
+        "Building " +
+        building +
+        " Lunch Count";
 
 
     loadTeachers();
@@ -535,27 +475,85 @@ function openBuilding(buildingNumber) {
 }
 
 
-
 /* =========================================
-   GO HOME
+   HOME
 ========================================= */
 
 function goHome() {
 
+    document.getElementById("homePage")
+        .style.display = "block";
 
-    document.getElementById("homePage").style.display =
-        "block";
 
-
-    document.getElementById("buildingPage").style.display =
-        "none";
+    document.getElementById("buildingPage")
+        .style.display = "none";
 
 
     currentBuilding = null;
 
-
 }
 
+
+/* =========================================
+   JSONP REQUEST
+========================================= */
+
+function jsonp(action) {
+
+    return new Promise(function(resolve, reject) {
+
+        const callbackName =
+            "jsonpCallback_" +
+            Date.now() +
+            "_" +
+            (++jsonpCounter);
+
+
+        window[callbackName] =
+            function(data) {
+
+                delete window[callbackName];
+
+                script.remove();
+
+                resolve(data);
+
+            };
+
+
+        const script =
+            document.createElement("script");
+
+
+        script.src =
+            API_URL +
+            "?action=" +
+            encodeURIComponent(action) +
+            "&callback=" +
+            callbackName;
+
+
+        script.onerror =
+            function() {
+
+                delete window[callbackName];
+
+                script.remove();
+
+                reject(
+                    new Error(
+                        "Could not connect to Google Apps Script."
+                    )
+                );
+
+            };
+
+
+        document.body.appendChild(script);
+
+    });
+
+}
 
 
 /* =========================================
@@ -564,41 +562,26 @@ function goHome() {
 
 async function loadTeachers() {
 
-
     const select =
-        document.getElementById("teacherSelect");
+        document.getElementById(
+            "teacherSelect"
+        );
 
 
     select.innerHTML =
-        '<option value="">Loading teachers...</option>';
+        "<option>Loading teachers...</option>";
 
 
     try {
 
-
-        const response =
-            await fetch(
-                API_URL + "?action=teachers"
-            );
-
-
-        if (!response.ok) {
-
-            throw new Error(
-                "HTTP Error " + response.status
-            );
-
-        }
-
-
         const result =
-            await response.json();
+            await jsonp("teachers");
 
 
         if (!result.success) {
 
             throw new Error(
-                result.message || "Could not load teachers"
+                result.message
             );
 
         }
@@ -614,41 +597,53 @@ async function loadTeachers() {
 
         const buildingTeachers =
             allTeachers
-                .filter(function(teacher) {
+            .filter(function(teacher) {
 
-                    return String(teacher.building).trim() ===
-                        String(currentBuilding).trim();
+                return String(
+                    teacher.building
+                ).trim()
+                ===
+                String(
+                    currentBuilding
+                ).trim();
 
-                })
-                .sort(function(a, b) {
+            })
+            .sort(function(a,b) {
 
-                    return a.name.localeCompare(b.name);
+                return a.name
+                    .localeCompare(b.name);
 
-                });
-
-
-        buildingTeachers.forEach(function(teacher) {
-
-
-            const option =
-                document.createElement("option");
-
-
-            option.value =
-                teacher.name;
+            });
 
 
-            option.textContent =
-                teacher.name;
+        buildingTeachers.forEach(
+            function(teacher) {
+
+                const option =
+                    document.createElement(
+                        "option"
+                    );
 
 
-            select.appendChild(option);
+                option.value =
+                    teacher.name;
 
 
-        });
+                option.textContent =
+                    teacher.name;
 
 
-        if (buildingTeachers.length === 0) {
+                select.appendChild(
+                    option
+                );
+
+            }
+        );
+
+
+        if (
+            buildingTeachers.length === 0
+        ) {
 
             select.innerHTML =
                 '<option value="">No teachers found</option>';
@@ -656,10 +651,7 @@ async function loadTeachers() {
         }
 
 
-    }
-
-    catch (error) {
-
+    } catch(error) {
 
         console.error(error);
 
@@ -669,50 +661,36 @@ async function loadTeachers() {
 
 
         showMessage(
-            "Could not connect to the teacher list.",
+            "Unable to connect to teacher list.",
             false
         );
-
 
     }
 
 }
 
 
-
 /* =========================================
-   LOAD LUNCH DATA
+   LOAD LUNCH
 ========================================= */
 
 async function loadLunchData() {
 
+    document.getElementById("results")
+        .innerHTML =
+        '<div class="loading">Loading...</div>';
+
 
     try {
 
-
-        const response =
-            await fetch(
-                API_URL + "?action=lunch"
-            );
-
-
-        if (!response.ok) {
-
-            throw new Error(
-                "HTTP Error " + response.status
-            );
-
-        }
-
-
         const result =
-            await response.json();
+            await jsonp("lunch");
 
 
         if (!result.success) {
 
             throw new Error(
-                result.message || "Could not load lunch data"
+                result.message
             );
 
         }
@@ -725,30 +703,26 @@ async function loadLunchData() {
         displayLunchData();
 
 
-    }
-
-    catch (error) {
-
+    } catch(error) {
 
         console.error(error);
 
 
-        document.getElementById("results").innerHTML =
+        document.getElementById(
+            "results"
+        ).innerHTML =
             "<p>Unable to load lunch data.</p>";
-
 
     }
 
 }
 
 
-
 /* =========================================
-   DISPLAY LUNCH DATA
+   DISPLAY
 ========================================= */
 
 function displayLunchData() {
-
 
     const today =
         getToday();
@@ -757,235 +731,273 @@ function displayLunchData() {
     const teacherData = {};
 
 
-    allLunchData.forEach(function(item) {
+    allLunchData.forEach(
+        function(item) {
 
 
-        const itemBuilding =
-            String(item.building).trim();
+            const building =
+                String(
+                    item.building
+                ).trim();
 
 
-        const itemDate =
-            formatDate(item.date);
+            const date =
+                formatDate(
+                    item.date
+                );
 
 
-        if (
-            itemBuilding ===
-                String(currentBuilding).trim()
-            &&
-            itemDate === today
-        ) {
+            if (
 
+                building ===
+                String(
+                    currentBuilding
+                ).trim()
 
-            teacherData[item.teacher] =
+                &&
+
+                date === today
+
+            ) {
+
+                teacherData[
+                    item.teacher
+                ] =
                 Number(item.lunch) || 0;
 
+            }
 
         }
-
-    });
-
+    );
 
 
     let total = 0;
 
 
-    Object.values(teacherData)
-        .forEach(function(value) {
+    Object.values(
+        teacherData
+    ).forEach(
+        function(value) {
 
             total += value;
 
-        });
+        }
+    );
 
 
-
-    document.getElementById("totalCount").innerText =
+    document.getElementById(
+        "totalCount"
+    ).innerText =
         total;
 
 
-
     const teachers =
-        Object.keys(teacherData).sort();
+        Object.keys(
+            teacherData
+        ).sort();
 
 
+    if (
+        teachers.length === 0
+    ) {
 
-    if (teachers.length === 0) {
-
-
-        document.getElementById("results").innerHTML =
-
+        document.getElementById(
+            "results"
+        ).innerHTML =
             "<p>No lunch counts submitted yet today.</p>";
-
 
         return;
 
     }
 
 
-
     let html = `
 
-        <table>
+<table>
 
-            <thead>
+<thead>
 
-                <tr>
+<tr>
 
-                    <th>Teacher</th>
+<th>Teacher</th>
 
-                    <th>Lunch</th>
+<th>Lunch</th>
 
-                </tr>
+</tr>
 
-            </thead>
+</thead>
 
-            <tbody>
+<tbody>
 
-    `;
-
-
-
-    teachers.forEach(function(teacher) {
+`;
 
 
-        html += `
+    teachers.forEach(
+        function(teacher) {
 
-            <tr>
+            html += `
 
-                <td>
-                    ${escapeHtml(teacher)}
-                </td>
+<tr>
 
-                <td>
-                    ${teacherData[teacher]}
-                </td>
+<td>
+${escapeHtml(teacher)}
+</td>
 
-            </tr>
+<td>
+${teacherData[teacher]}
+</td>
 
-        `;
+</tr>
 
-    });
+`;
 
+        }
+    );
 
 
     html += `
 
-            </tbody>
+</tbody>
 
-        </table>
+</table>
 
-    `;
+`;
 
 
-
-    document.getElementById("results").innerHTML =
+    document.getElementById(
+        "results"
+    ).innerHTML =
         html;
 
 }
 
 
-
 /* =========================================
-   SUBMIT LUNCH
+   SUBMIT
 ========================================= */
 
-async function submitLunch() {
-
+function submitLunch() {
 
     const teacher =
-        document.getElementById("teacherSelect").value;
+        document.getElementById(
+            "teacherSelect"
+        ).value;
 
 
     const lunch =
-        document.getElementById("lunchCount").value;
+        document.getElementById(
+            "lunchCount"
+        ).value;
 
 
     if (!teacher) {
-
 
         showMessage(
             "Please select your name.",
             false
         );
 
-
         return;
 
     }
 
 
-
     if (
         lunch === "" ||
         Number(lunch) < 0 ||
-        !Number.isInteger(Number(lunch))
+        !Number.isInteger(
+            Number(lunch)
+        )
     ) {
-
 
         showMessage(
             "Please enter a whole number.",
             false
         );
 
-
         return;
 
     }
 
 
-
     const button =
-        document.getElementById("submitButton");
+        document.getElementById(
+            "submitButton"
+        );
 
 
     button.disabled = true;
 
-    button.innerText = "SUBMITTING...";
+    button.innerText =
+        "SUBMITTING...";
 
 
+    /*
+       Create temporary form
+       so browser does NOT block
+       the Google Apps Script request.
+    */
 
-    try {
-
-
-        const formData =
-            new URLSearchParams();
-
-
-        formData.append(
-            "building",
-            currentBuilding
-        );
+    const form =
+        document.createElement("form");
 
 
-        formData.append(
-            "teacher",
-            teacher
-        );
+    form.method = "POST";
+
+    form.action = API_URL;
+
+    form.target = "submitFrame";
+
+    form.style.display = "none";
 
 
-        formData.append(
-            "lunch",
-            lunch
-        );
+    addFormField(
+        form,
+        "building",
+        currentBuilding
+    );
 
 
-
-        const response =
-            await fetch(
-                API_URL,
-                {
-                    method: "POST",
-                    body: formData
-                }
-            );
+    addFormField(
+        form,
+        "teacher",
+        teacher
+    );
 
 
+    addFormField(
+        form,
+        "lunch",
+        lunch
+    );
 
-        const result =
-            await response.json();
+
+    document.body.appendChild(form);
 
 
+    form.submit();
 
-        if (result.success) {
+
+    form.remove();
+
+
+    /*
+       Wait for Apps Script
+       to save the data.
+    */
+
+    setTimeout(
+        async function() {
+
+            button.disabled = false;
+
+            button.innerText =
+                "SUBMIT";
+
+
+            document.getElementById(
+                "lunchCount"
+            ).value = "";
 
 
             showMessage(
@@ -994,62 +1006,64 @@ async function submitLunch() {
             );
 
 
-            document.getElementById("lunchCount").value =
-                "";
-
-
             await loadLunchData();
 
 
-        }
-
-        else {
-
-
-            showMessage(
-                result.message ||
-                "Something went wrong.",
-                false
-            );
-
-        }
-
-
-    }
-
-    catch (error) {
-
-
-        console.error(error);
-
-
-        showMessage(
-            "Could not submit lunch count.",
-            false
-        );
-
-
-    }
-
-
-
-    button.disabled = false;
-
-    button.innerText = "SUBMIT";
+        },
+        1200
+    );
 
 }
 
+
+/* =========================================
+   FORM FIELD
+========================================= */
+
+function addFormField(
+    form,
+    name,
+    value
+) {
+
+    const input =
+        document.createElement(
+            "input"
+        );
+
+
+    input.type =
+        "hidden";
+
+
+    input.name =
+        name;
+
+
+    input.value =
+        value;
+
+
+    form.appendChild(
+        input
+    );
+
+}
 
 
 /* =========================================
    MESSAGE
 ========================================= */
 
-function showMessage(text, success) {
-
+function showMessage(
+    text,
+    success
+) {
 
     const message =
-        document.getElementById("message");
+        document.getElementById(
+            "message"
+        );
 
 
     message.innerText =
@@ -1058,22 +1072,28 @@ function showMessage(text, success) {
 
     message.className =
         "message " +
-        (success ? "success" : "error");
+        (
+            success
+            ? "success"
+            : "error"
+        );
 
 
     message.style.display =
         "block";
 
 
-    setTimeout(function() {
+    setTimeout(
+        function() {
 
-        message.style.display =
-            "none";
+            message.style.display =
+                "none";
 
-    }, 4000);
+        },
+        4000
+    );
 
 }
-
 
 
 /* =========================================
@@ -1081,7 +1101,6 @@ function showMessage(text, success) {
 ========================================= */
 
 function getToday() {
-
 
     const now =
         new Date();
@@ -1092,13 +1111,15 @@ function getToday() {
 
 
     const month =
-        String(now.getMonth() + 1)
-            .padStart(2, "0");
+        String(
+            now.getMonth() + 1
+        ).padStart(2, "0");
 
 
     const day =
-        String(now.getDate())
-            .padStart(2, "0");
+        String(
+            now.getDate()
+        ).padStart(2, "0");
 
 
     return (
@@ -1112,18 +1133,14 @@ function getToday() {
 }
 
 
-
 /* =========================================
-   FORMAT DATE
+   DATE
 ========================================= */
 
 function formatDate(value) {
 
-
     if (!value) {
-
         return "";
-
     }
 
 
@@ -1131,7 +1148,11 @@ function formatDate(value) {
         new Date(value);
 
 
-    if (isNaN(date.getTime())) {
+    if (
+        isNaN(
+            date.getTime()
+        )
+    ) {
 
         return "";
 
@@ -1143,13 +1164,15 @@ function formatDate(value) {
 
 
     const month =
-        String(date.getMonth() + 1)
-            .padStart(2, "0");
+        String(
+            date.getMonth() + 1
+        ).padStart(2, "0");
 
 
     const day =
-        String(date.getDate())
-            .padStart(2, "0");
+        String(
+            date.getDate()
+        ).padStart(2, "0");
 
 
     return (
@@ -1163,13 +1186,11 @@ function formatDate(value) {
 }
 
 
-
 /* =========================================
    ESCAPE HTML
 ========================================= */
 
 function escapeHtml(text) {
-
 
     const div =
         document.createElement("div");
@@ -1182,7 +1203,6 @@ function escapeHtml(text) {
     return div.innerHTML;
 
 }
-
 
 </script>
 
