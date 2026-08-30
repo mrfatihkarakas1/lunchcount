@@ -1,275 +1,386 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Lunch Count</title>
+    <title>Lunch Count</title>
 
-<style>
+    <style>
 
-* {
-    box-sizing: border-box;
-}
+        * {
+            box-sizing: border-box;
+        }
 
-body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    background: #f4f6f8;
-    color: #1f2937;
-}
+        body {
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f4f6f8;
+            color: #1f2937;
+        }
 
-header {
-    background: #123c69;
-    color: white;
-    padding: 25px 40px;
-}
+        header {
+            background: #123c69;
+            color: white;
+            padding: 28px 40px;
+        }
 
-header h1 {
-    margin: 0;
-    font-size: 32px;
-}
+        header h1 {
+            margin: 0;
+            font-size: 34px;
+        }
 
-header p {
-    margin: 6px 0 0;
-    opacity: 0.85;
-}
+        header p {
+            margin: 6px 0 0;
+            font-size: 17px;
+            opacity: 0.9;
+        }
 
-.container {
-    max-width: 1200px;
-    margin: 40px auto;
-    padding: 0 20px;
-}
+        .container {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
 
-.home {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 25px;
-}
+        /* =========================
+           HOME
+        ========================= */
 
-.building-card {
-    background: white;
-    border-radius: 16px;
-    padding: 40px;
-    text-align: center;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
-    cursor: pointer;
-    transition: 0.2s;
-}
+        .home {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
 
-.building-card:hover {
-    transform: translateY(-4px);
-}
+        .building-card {
+            background: white;
+            border-radius: 16px;
+            padding: 50px 30px;
+            text-align: center;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+            cursor: pointer;
+            transition: 0.2s;
+        }
 
-.building-card h2 {
-    font-size: 28px;
-    margin-bottom: 10px;
-}
+        .building-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+        }
 
-.building-card button {
-    margin-top: 20px;
-    padding: 14px 30px;
-    border: none;
-    border-radius: 8px;
-    background: #123c69;
-    color: white;
-    font-size: 16px;
-    cursor: pointer;
-}
+        .building-card h2 {
+            font-size: 30px;
+            margin: 0 0 12px;
+        }
 
-.page {
-    display: none;
-}
+        .building-card p {
+            color: #6b7280;
+        }
 
-.back {
-    background: none;
-    border: none;
-    color: #123c69;
-    font-size: 16px;
-    cursor: pointer;
-    margin-bottom: 20px;
-}
+        .building-card button {
+            margin-top: 20px;
+            padding: 14px 28px;
+            border: none;
+            border-radius: 8px;
+            background: #123c69;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+        }
 
-.layout {
-    display: grid;
-    grid-template-columns: 380px 1fr;
-    gap: 30px;
-}
+        /* =========================
+           BUILDING PAGE
+        ========================= */
 
-.form-card,
-.results-card {
-    background: white;
-    border-radius: 16px;
-    padding: 30px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
-}
+        .page {
+            display: none;
+        }
 
-.form-card h2,
-.results-card h2 {
-    margin-top: 0;
-}
+        .back {
+            background: none;
+            border: none;
+            color: #123c69;
+            font-size: 17px;
+            cursor: pointer;
+            margin-bottom: 20px;
+            padding: 0;
+        }
 
-label {
-    display: block;
-    margin-top: 20px;
-    margin-bottom: 8px;
-    font-weight: bold;
-}
+        .layout {
+            display: grid;
+            grid-template-columns: 380px 1fr;
+            gap: 30px;
+        }
 
-select,
-input {
-    width: 100%;
-    padding: 14px;
-    border: 1px solid #d1d5db;
-    border-radius: 8px;
-    font-size: 16px;
-}
+        .form-card,
+        .results-card {
+            background: white;
+            border-radius: 16px;
+            padding: 30px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+        }
 
-.submit-btn {
-    width: 100%;
-    margin-top: 25px;
-    padding: 15px;
-    border: none;
-    border-radius: 8px;
-    background: #198754;
-    color: white;
-    font-size: 17px;
-    font-weight: bold;
-    cursor: pointer;
-}
+        .form-card h2,
+        .results-card h2 {
+            margin-top: 0;
+        }
 
-.submit-btn:hover {
-    background: #157347;
-}
+        /* =========================
+           FORM
+        ========================= */
 
-.total {
-    font-size: 38px;
-    font-weight: bold;
-    margin: 15px 0 25px;
-    color: #123c69;
-}
+        label {
+            display: block;
+            margin-top: 22px;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
 
-table {
-    width: 100%;
-    border-collapse: collapse;
-}
+        select,
+        input {
+            width: 100%;
+            padding: 14px;
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            font-size: 16px;
+            background: white;
+        }
 
-th,
-td {
-    padding: 13px;
-    text-align: left;
-    border-bottom: 1px solid #e5e7eb;
-}
+        select:focus,
+        input:focus {
+            outline: none;
+            border-color: #123c69;
+        }
 
-th {
-    background: #f8fafc;
-}
+        .submit-btn {
+            width: 100%;
+            margin-top: 25px;
+            padding: 15px;
+            border: none;
+            border-radius: 8px;
+            background: #198754;
+            color: white;
+            font-size: 17px;
+            font-weight: bold;
+            cursor: pointer;
+        }
 
-.message {
-    margin-top: 15px;
-    padding: 10px;
-    border-radius: 7px;
-    display: none;
-}
+        .submit-btn:hover {
+            background: #157347;
+        }
 
-.success {
-    background: #d1e7dd;
-    color: #0f5132;
-}
+        .submit-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
 
-.error {
-    background: #f8d7da;
-    color: #842029;
-}
+        /* =========================
+           TOTAL
+        ========================= */
 
-.loading {
-    text-align: center;
-    padding: 20px;
-}
+        .total {
+            font-size: 38px;
+            font-weight: bold;
+            margin: 15px 0 25px;
+            color: #123c69;
+        }
 
-@media(max-width: 800px) {
+        /* =========================
+           TABLE
+        ========================= */
 
-    .home {
-        grid-template-columns: 1fr;
-    }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
 
-    .layout {
-        grid-template-columns: 1fr;
-    }
+        th,
+        td {
+            padding: 13px;
+            text-align: left;
+            border-bottom: 1px solid #e5e7eb;
+        }
 
-}
+        th {
+            background: #f8fafc;
+        }
 
-</style>
+        td:last-child,
+        th:last-child {
+            text-align: right;
+        }
+
+        /* =========================
+           MESSAGES
+        ========================= */
+
+        .message {
+            margin-top: 15px;
+            padding: 12px;
+            border-radius: 7px;
+            display: none;
+        }
+
+        .success {
+            background: #d1e7dd;
+            color: #0f5132;
+        }
+
+        .error {
+            background: #f8d7da;
+            color: #842029;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 20px;
+            color: #6b7280;
+        }
+
+        /* =========================
+           MOBILE
+        ========================= */
+
+        @media (max-width: 800px) {
+
+            .home {
+                grid-template-columns: 1fr;
+            }
+
+            .layout {
+                grid-template-columns: 1fr;
+            }
+
+            header {
+                padding: 22px;
+            }
+
+            header h1 {
+                font-size: 28px;
+            }
+
+            .container {
+                margin: 25px auto;
+            }
+
+        }
+
+    </style>
+
 </head>
 
+
 <body>
+
 
 <header>
 
     <h1>Lunch Count</h1>
+
     <p>Daily Student Lunch Count</p>
 
 </header>
 
 
+
 <div class="container">
 
-    <!-- HOME -->
+
+    <!-- =========================================
+         HOME PAGE
+    ========================================== -->
 
     <div id="homePage">
 
         <div class="home">
 
-            <div class="building-card" onclick="openBuilding('Building 1')">
+
+            <!-- BUILDING 1 -->
+
+            <div
+                class="building-card"
+                onclick="openBuilding(1)"
+            >
 
                 <h2>Building 1</h2>
 
-                <p>Enter lunch count for Building 1</p>
+                <p>
+                    Enter lunch count for Building 1
+                </p>
 
-                <button>Open Building 1</button>
+                <button>
+                    Open Building 1
+                </button>
 
             </div>
 
 
-            <div class="building-card" onclick="openBuilding('Building 2')">
+
+            <!-- BUILDING 2 -->
+
+            <div
+                class="building-card"
+                onclick="openBuilding(2)"
+            >
 
                 <h2>Building 2</h2>
 
-                <p>Enter lunch count for Building 2</p>
+                <p>
+                    Enter lunch count for Building 2
+                </p>
 
-                <button>Open Building 2</button>
+                <button>
+                    Open Building 2
+                </button>
 
             </div>
+
 
         </div>
 
     </div>
 
 
-    <!-- BUILDING PAGE -->
 
-    <div id="buildingPage" class="page">
+    <!-- =========================================
+         BUILDING PAGE
+    ========================================== -->
 
-        <button class="back" onclick="goHome()">
+    <div
+        id="buildingPage"
+        class="page"
+    >
+
+
+        <button
+            class="back"
+            onclick="goHome()"
+        >
             ← Back to Buildings
         </button>
+
 
 
         <div class="layout">
 
 
-            <!-- LEFT SIDE -->
+            <!-- =================================
+                 LEFT - FORM
+            ================================== -->
 
             <div class="form-card">
+
 
                 <h2 id="buildingTitle">
                     Building 1
                 </h2>
 
 
+
                 <label>
                     Teacher
                 </label>
+
 
                 <select id="teacherSelect">
 
@@ -280,24 +391,30 @@ th {
                 </select>
 
 
+
                 <label>
                     How many students need lunch?
                 </label>
+
 
                 <input
                     type="number"
                     id="lunchCount"
                     min="0"
+                    step="1"
                     placeholder="Example: 20"
                 >
 
 
+
                 <button
                     class="submit-btn"
+                    id="submitButton"
                     onclick="submitLunch()"
                 >
                     SUBMIT
                 </button>
+
 
 
                 <div
@@ -305,26 +422,31 @@ th {
                     class="message"
                 ></div>
 
+
             </div>
 
 
-            <!-- RIGHT SIDE -->
+
+            <!-- =================================
+                 RIGHT - RESULTS
+            ================================== -->
 
             <div class="results-card">
+
 
                 <h2 id="resultsTitle">
                     Building 1 Lunch Count
                 </h2>
 
 
+
                 <div class="total">
 
                     Total:
-                    <span id="totalCount">
-                        0
-                    </span>
+                    <span id="totalCount">0</span>
 
                 </div>
+
 
 
                 <div id="results">
@@ -335,14 +457,18 @@ th {
 
                 </div>
 
+
             </div>
 
 
         </div>
 
+
     </div>
 
+
 </div>
+
 
 
 <script>
@@ -356,30 +482,51 @@ const API_URL =
 "https://script.google.com/a/macros/seminolescience.net/s/AKfycbwI5WYmIqwG59abeEpW2ZKZTENXitBqwVtDQGnYqOryIK5dkr_E6RMHx1zX3Gajq-xA6Q/exec";
 
 
-let currentBuilding = "";
+/* =========================================
+   VARIABLES
+========================================= */
+
+let currentBuilding = null;
 
 let allTeachers = [];
 
 let allLunchData = [];
 
 
+
 /* =========================================
    OPEN BUILDING
 ========================================= */
 
-function openBuilding(building) {
+function openBuilding(buildingNumber) {
 
-    currentBuilding = building;
 
-    document.getElementById("homePage").style.display = "none";
+    currentBuilding = String(buildingNumber);
 
-    document.getElementById("buildingPage").style.display = "block";
+
+    document.getElementById("homePage").style.display =
+        "none";
+
+
+    document.getElementById("buildingPage").style.display =
+        "block";
+
 
     document.getElementById("buildingTitle").innerText =
-        building;
+        "Building " + buildingNumber;
+
 
     document.getElementById("resultsTitle").innerText =
-        building + " Lunch Count";
+        "Building " + buildingNumber + " Lunch Count";
+
+
+    document.getElementById("totalCount").innerText =
+        "0";
+
+
+    document.getElementById("results").innerHTML =
+        '<div class="loading">Loading...</div>';
+
 
     loadTeachers();
 
@@ -388,19 +535,27 @@ function openBuilding(building) {
 }
 
 
+
 /* =========================================
    GO HOME
 ========================================= */
 
 function goHome() {
 
-    document.getElementById("homePage").style.display = "block";
 
-    document.getElementById("buildingPage").style.display = "none";
+    document.getElementById("homePage").style.display =
+        "block";
 
-    currentBuilding = "";
+
+    document.getElementById("buildingPage").style.display =
+        "none";
+
+
+    currentBuilding = null;
+
 
 }
+
 
 
 /* =========================================
@@ -409,66 +564,120 @@ function goHome() {
 
 async function loadTeachers() {
 
+
     const select =
         document.getElementById("teacherSelect");
+
 
     select.innerHTML =
         '<option value="">Loading teachers...</option>';
 
+
     try {
 
+
         const response =
-            await fetch(API_URL + "?action=teachers");
+            await fetch(
+                API_URL + "?action=teachers"
+            );
+
+
+        if (!response.ok) {
+
+            throw new Error(
+                "HTTP Error " + response.status
+            );
+
+        }
+
 
         const result =
             await response.json();
 
-        allTeachers = result.teachers || [];
+
+        if (!result.success) {
+
+            throw new Error(
+                result.message || "Could not load teachers"
+            );
+
+        }
+
+
+        allTeachers =
+            result.teachers || [];
+
 
         select.innerHTML =
             '<option value="">Select your name</option>';
 
-        allTeachers
 
-            .filter(function(teacher) {
+        const buildingTeachers =
+            allTeachers
+                .filter(function(teacher) {
 
-                return teacher.building === currentBuilding;
+                    return String(teacher.building).trim() ===
+                        String(currentBuilding).trim();
 
-            })
+                })
+                .sort(function(a, b) {
 
-            .sort(function(a,b) {
+                    return a.name.localeCompare(b.name);
 
-                return a.name.localeCompare(b.name);
-
-            })
-
-            .forEach(function(teacher) {
-
-                const option =
-                    document.createElement("option");
-
-                option.value = teacher.name;
-
-                option.textContent = teacher.name;
-
-                select.appendChild(option);
-
-            });
+                });
 
 
-    } catch(error) {
+        buildingTeachers.forEach(function(teacher) {
+
+
+            const option =
+                document.createElement("option");
+
+
+            option.value =
+                teacher.name;
+
+
+            option.textContent =
+                teacher.name;
+
+
+            select.appendChild(option);
+
+
+        });
+
+
+        if (buildingTeachers.length === 0) {
+
+            select.innerHTML =
+                '<option value="">No teachers found</option>';
+
+        }
+
+
+    }
+
+    catch (error) {
+
+
+        console.error(error);
+
 
         select.innerHTML =
             '<option value="">Unable to load teachers</option>';
 
+
         showMessage(
-            "Could not load teacher list.",
+            "Could not connect to the teacher list.",
             false
         );
+
 
     }
 
 }
+
 
 
 /* =========================================
@@ -477,26 +686,61 @@ async function loadTeachers() {
 
 async function loadLunchData() {
 
+
     try {
 
+
         const response =
-            await fetch(API_URL + "?action=lunch");
+            await fetch(
+                API_URL + "?action=lunch"
+            );
+
+
+        if (!response.ok) {
+
+            throw new Error(
+                "HTTP Error " + response.status
+            );
+
+        }
+
 
         const result =
             await response.json();
 
-        allLunchData = result.data || [];
+
+        if (!result.success) {
+
+            throw new Error(
+                result.message || "Could not load lunch data"
+            );
+
+        }
+
+
+        allLunchData =
+            result.data || [];
+
 
         displayLunchData();
 
-    } catch(error) {
+
+    }
+
+    catch (error) {
+
+
+        console.error(error);
+
 
         document.getElementById("results").innerHTML =
             "<p>Unable to load lunch data.</p>";
 
+
     }
 
 }
+
 
 
 /* =========================================
@@ -505,39 +749,45 @@ async function loadLunchData() {
 
 function displayLunchData() {
 
+
     const today =
-        new Date().toISOString().split("T")[0];
-
-
-    const buildingData =
-        allLunchData.filter(function(item) {
-
-            return (
-                item.building === currentBuilding
-            );
-
-        });
+        getToday();
 
 
     const teacherData = {};
 
 
-    buildingData.forEach(function(item) {
+    allLunchData.forEach(function(item) {
+
+
+        const itemBuilding =
+            String(item.building).trim();
+
 
         const itemDate =
             formatDate(item.date);
 
-        if (itemDate === today) {
+
+        if (
+            itemBuilding ===
+                String(currentBuilding).trim()
+            &&
+            itemDate === today
+        ) {
+
 
             teacherData[item.teacher] =
                 Number(item.lunch) || 0;
+
 
         }
 
     });
 
 
+
     let total = 0;
+
 
     Object.values(teacherData)
         .forEach(function(value) {
@@ -547,22 +797,29 @@ function displayLunchData() {
         });
 
 
+
     document.getElementById("totalCount").innerText =
         total;
+
 
 
     const teachers =
         Object.keys(teacherData).sort();
 
 
+
     if (teachers.length === 0) {
 
+
         document.getElementById("results").innerHTML =
+
             "<p>No lunch counts submitted yet today.</p>";
+
 
         return;
 
     }
+
 
 
     let html = `
@@ -586,21 +843,28 @@ function displayLunchData() {
     `;
 
 
+
     teachers.forEach(function(teacher) {
+
 
         html += `
 
             <tr>
 
-                <td>${escapeHtml(teacher)}</td>
+                <td>
+                    ${escapeHtml(teacher)}
+                </td>
 
-                <td>${teacherData[teacher]}</td>
+                <td>
+                    ${teacherData[teacher]}
+                </td>
 
             </tr>
 
         `;
 
     });
+
 
 
     html += `
@@ -612,20 +876,24 @@ function displayLunchData() {
     `;
 
 
+
     document.getElementById("results").innerHTML =
         html;
 
 }
 
 
+
 /* =========================================
-   SUBMIT
+   SUBMIT LUNCH
 ========================================= */
 
 async function submitLunch() {
 
+
     const teacher =
         document.getElementById("teacherSelect").value;
+
 
     const lunch =
         document.getElementById("lunchCount").value;
@@ -633,92 +901,136 @@ async function submitLunch() {
 
     if (!teacher) {
 
+
         showMessage(
             "Please select your name.",
             false
         );
 
+
         return;
 
     }
+
 
 
     if (
         lunch === "" ||
-        Number(lunch) < 0
+        Number(lunch) < 0 ||
+        !Number.isInteger(Number(lunch))
     ) {
 
+
         showMessage(
-            "Please enter the number of students.",
+            "Please enter a whole number.",
             false
         );
+
 
         return;
 
     }
 
 
+
     const button =
-        document.querySelector(".submit-btn");
+        document.getElementById("submitButton");
+
 
     button.disabled = true;
 
     button.innerText = "SUBMITTING...";
 
 
+
     try {
 
+
+        const formData =
+            new URLSearchParams();
+
+
+        formData.append(
+            "building",
+            currentBuilding
+        );
+
+
+        formData.append(
+            "teacher",
+            teacher
+        );
+
+
+        formData.append(
+            "lunch",
+            lunch
+        );
+
+
+
         const response =
-            await fetch(API_URL, {
+            await fetch(
+                API_URL,
+                {
+                    method: "POST",
+                    body: formData
+                }
+            );
 
-                method: "POST",
-
-                body: JSON.stringify({
-
-                    building: currentBuilding,
-
-                    teacher: teacher,
-
-                    lunch: Number(lunch)
-
-                })
-
-            });
 
 
         const result =
             await response.json();
 
 
+
         if (result.success) {
+
 
             showMessage(
                 "Lunch count submitted successfully!",
                 true
             );
 
-            document.getElementById("lunchCount").value = "";
+
+            document.getElementById("lunchCount").value =
+                "";
+
 
             await loadLunchData();
 
-        } else {
+
+        }
+
+        else {
+
 
             showMessage(
-                result.message || "Something went wrong.",
+                result.message ||
+                "Something went wrong.",
                 false
             );
 
         }
 
 
-    } catch(error) {
+    }
+
+    catch (error) {
+
+
+        console.error(error);
+
 
         showMessage(
             "Could not submit lunch count.",
             false
         );
 
+
     }
+
 
 
     button.disabled = false;
@@ -728,61 +1040,144 @@ async function submitLunch() {
 }
 
 
+
 /* =========================================
    MESSAGE
 ========================================= */
 
 function showMessage(text, success) {
 
+
     const message =
         document.getElementById("message");
 
-    message.innerText = text;
+
+    message.innerText =
+        text;
+
 
     message.className =
         "message " +
         (success ? "success" : "error");
 
-    message.style.display = "block";
+
+    message.style.display =
+        "block";
 
 
     setTimeout(function() {
 
-        message.style.display = "none";
+        message.style.display =
+            "none";
 
     }, 4000);
 
 }
 
 
+
 /* =========================================
-   DATE
+   TODAY
 ========================================= */
 
-function formatDate(value) {
+function getToday() {
 
-    const date =
-        new Date(value);
 
-    if (isNaN(date)) {
-        return "";
-    }
+    const now =
+        new Date();
 
-    return date.toISOString().split("T")[0];
+
+    const year =
+        now.getFullYear();
+
+
+    const month =
+        String(now.getMonth() + 1)
+            .padStart(2, "0");
+
+
+    const day =
+        String(now.getDate())
+            .padStart(2, "0");
+
+
+    return (
+        year +
+        "-" +
+        month +
+        "-" +
+        day
+    );
 
 }
 
 
+
 /* =========================================
-   SECURITY
+   FORMAT DATE
+========================================= */
+
+function formatDate(value) {
+
+
+    if (!value) {
+
+        return "";
+
+    }
+
+
+    const date =
+        new Date(value);
+
+
+    if (isNaN(date.getTime())) {
+
+        return "";
+
+    }
+
+
+    const year =
+        date.getFullYear();
+
+
+    const month =
+        String(date.getMonth() + 1)
+            .padStart(2, "0");
+
+
+    const day =
+        String(date.getDate())
+            .padStart(2, "0");
+
+
+    return (
+        year +
+        "-" +
+        month +
+        "-" +
+        day
+    );
+
+}
+
+
+
+/* =========================================
+   ESCAPE HTML
 ========================================= */
 
 function escapeHtml(text) {
 
+
     const div =
         document.createElement("div");
 
-    div.textContent = text;
+
+    div.textContent =
+        text;
+
 
     return div.innerHTML;
 
@@ -791,5 +1186,7 @@ function escapeHtml(text) {
 
 </script>
 
+
 </body>
+
 </html>
