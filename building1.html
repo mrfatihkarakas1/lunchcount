@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Building 1 - Lunch Count</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f3f6fa;
+            min-height: 100vh;
+        }
+
+        header {
+            background: #123b6d;
+            color: white;
+            padding: 25px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 28px;
+        }
+
+        .menu-button {
+            background: white;
+            color: #123b6d;
+            text-decoration: none;
+            padding: 12px 20px;
+            border-radius: 10px;
+            font-weight: bold;
+        }
+
+        .main {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: 1fr 1.4fr;
+            gap: 30px;
+        }
+
+        .card {
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+        }
+
+        .card h2 {
+            margin-top: 0;
+            color: #123b6d;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        input {
+            width: 100%;
+            padding: 15px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            font-size: 17px;
+            margin-bottom: 25px;
+        }
+
+        .counter-title {
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .counter {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 25px;
+            margin: 20px 0 30px;
+        }
+
+        .counter button {
+            width: 50px;
+            height: 50px;
+            border: none;
+            border-radius: 50%;
+            background: #123b6d;
+            color: white;
+            font-size: 28px;
+            cursor: pointer;
+        }
+
+        .number {
+            font-size: 40px;
+            font-weight: bold;
+            min-width: 60px;
+            text-align: center;
+        }
+
+        .submit {
+            width: 100%;
+            padding: 16px;
+            border: none;
+            border-radius: 12px;
+            background: #123b6d;
+            color: white;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .submit:hover {
+            background: #0d2c52;
+        }
+
+        .teacher-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 15px 5px;
+            border-bottom: 1px solid #eee;
+            font-size: 17px;
+        }
+
+        .teacher-count {
+            font-weight: bold;
+        }
+
+        .total {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 25px;
+            padding-top: 20px;
+            border-top: 3px solid #123b6d;
+            font-size: 24px;
+            font-weight: bold;
+            color: #123b6d;
+        }
+
+        .back {
+            display: inline-block;
+            margin-top: 20px;
+            color: #123b6d;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        #message {
+            text-align: center;
+            margin-top: 15px;
+            font-weight: bold;
+        }
+
+        @media (max-width: 800px) {
+            .main {
+                grid-template-columns: 1fr;
+            }
+
+            header {
+                flex-direction: column;
+                gap: 15px;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+
+    <h1>SEMINOLE SCIENCE CHARTER SCHOOL</h1>
+
+    <a
+        class="menu-button"
+        href="https://sla-oss.nutrislice.com/menus-eula"
+        target="_blank">
+        📋 Lunch Menu
+    </a>
+
+</header>
+
+
+<div class="main">
+
+    <!-- LEFT SIDE -->
+
+    <div class="card">
+
+        <h2>BUILDING 1</h2>
+
+        <label for="teacher">Teacher Name</label>
+
+        <input
+            type="text"
+            id="teacher"
+            placeholder="Enter your name">
+
+        <div class="counter-title">
+            Students Eating School Lunch
+        </div>
+
+        <div class="counter">
+
+            <button onclick="changeCount(-1)">−</button>
+
+            <div class="number" id="count">0</div>
+
+            <button onclick="changeCount(1)">+</button>
+
+        </div>
+
+        <button class="submit" onclick="submitLunch()">
+            SUBMIT LUNCH COUNT
+        </button>
+
+        <div id="message"></div>
+
+        <a class="back" href="index.html">
+            ← Back to Building Selection
+        </a>
+
+    </div>
+
+
+    <!-- RIGHT SIDE -->
+
+    <div class="card">
+
+        <h2>Today's Lunch Count</h2>
+
+        <div id="teacherList">
+
+            <p style="color:#777;">
+                No lunch counts submitted yet.
+            </p>
+
+        </div>
+
+        <div class="total">
+
+            <span>TOTAL</span>
+
+            <span id="total">0</span>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<script>
+
+let count = 0;
+
+let submissions = [];
+
+
+function changeCount(amount) {
+
+    count += amount;
+
+    if (count < 0) {
+        count = 0;
+    }
+
+    document.getElementById("count").innerText = count;
+}
+
+
+function submitLunch() {
+
+    const teacher =
+        document.getElementById("teacher").value.trim();
+
+    if (teacher === "") {
+
+        alert("Please enter your name.");
+
+        return;
+    }
+
+    if (count === 0) {
+
+        alert("Please enter the number of students.");
+
+        return;
+    }
+
+
+    submissions.push({
+        teacher: teacher,
+        count: count
+    });
+
+
+    updateList();
+
+
+    document.getElementById("message").innerText =
+        "Lunch count submitted!";
+
+
+    document.getElementById("teacher").value = "";
+
+    count = 0;
+
+    document.getElementById("count").innerText = "0";
+
+}
+
+
+function updateList() {
+
+    const list =
+        document.getElementById("teacherList");
+
+    list.innerHTML = "";
+
+
+    let total = 0;
+
+
+    submissions.forEach(function(item) {
+
+        const row =
+            document.createElement("div");
+
+        row.className = "teacher-row";
+
+
+        row.innerHTML =
+            "<span>" + item.teacher + "</span>" +
+            "<span class='teacher-count'>" +
+            item.count +
+            "</span>";
+
+
+        list.appendChild(row);
+
+
+        total += item.count;
+
+    });
+
+
+    document.getElementById("total").innerText =
+        total;
+
+}
+
+</script>
+
+</body>
+</html>
