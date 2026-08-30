@@ -1,12 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta
+name="viewport"
+content="width=device-width, initial-scale=1.0">
 
 <title>Building 1 - Lunch Count</title>
 
 <style>
+
 * {
     box-sizing: border-box;
 }
@@ -99,6 +105,11 @@ input:focus {
     background: #0d2d52;
 }
 
+.submit-btn:disabled {
+    opacity: 0.6;
+    cursor: wait;
+}
+
 .message {
     margin-top: 15px;
     text-align: center;
@@ -153,6 +164,7 @@ input:focus {
 }
 
 @media (max-width: 750px) {
+
     .container {
         grid-template-columns: 1fr;
     }
@@ -164,122 +176,156 @@ input:focus {
     header h1 {
         font-size: 22px;
     }
+
 }
+
 </style>
+
 </head>
+
 
 <body>
 
-<header>
-    <h1>SSCS Lunch Count — Building 1</h1>
 
-    <a
-        class="menu-btn"
-        href="https://sla-oss.nutrislice.com/menus-eula"
-        target="_blank">
-        🍽️ Lunch Menu
-    </a>
+<header>
+
+<h1>
+SSCS Lunch Count — Building 1
+</h1>
+
+<a
+class="menu-btn"
+href="https://sla-oss.nutrislice.com/menus-eula"
+target="_blank">
+
+🍽️ Lunch Menu
+
+</a>
+
 </header>
+
 
 
 <div class="container">
 
-    <!-- LEFT SIDE -->
-    <div class="card">
 
-        <h2>Enter Lunch Count</h2>
+<!-- LEFT -->
 
-        <form id="lunchForm">
+<div class="card">
 
-            <label for="teacher">
-                Teacher Name
-            </label>
-
-            <input
-                type="text"
-                id="teacher"
-                placeholder="Enter your name"
-                autocomplete="off"
-                required
-            >
+<h2>
+Enter Lunch Count
+</h2>
 
 
-            <label for="lunchCount">
-                Lunch Count
-            </label>
-
-            <input
-                type="text"
-                id="lunchCount"
-                inputmode="numeric"
-                pattern="[0-9]*"
-                placeholder="Enter number"
-                autocomplete="off"
-                required
-            >
+<form id="lunchForm">
 
 
-            <button
-                type="submit"
-                class="submit-btn">
-                Submit Lunch Count
-            </button>
+<label for="teacher">
+Teacher Name
+</label>
 
-        </form>
-
-        <div
-            id="message"
-            class="message">
-        </div>
-
-        <a
-            class="back-btn"
-            href="index.html">
-            ← Back to Building Selection
-        </a>
-
-    </div>
+<input
+type="text"
+id="teacher"
+placeholder="Enter your name"
+autocomplete="off"
+required
+>
 
 
-    <!-- RIGHT SIDE -->
-    <div class="card">
+<label for="lunchCount">
+Lunch Count
+</label>
 
-        <h2>Today's Lunch Count</h2>
-
-        <div
-            id="teacherList"
-            class="teacher-list">
-
-            <div style="color:#777;">
-                Loading...
-            </div>
-
-        </div>
+<input
+type="text"
+id="lunchCount"
+inputmode="numeric"
+pattern="[0-9]*"
+placeholder="Enter number"
+autocomplete="off"
+required
+>
 
 
-        <div class="total-box">
+<button
+type="submit"
+class="submit-btn"
+id="submitBtn">
 
-            <div class="total-label">
-                TOTAL LUNCHES
-            </div>
+Submit Lunch Count
 
-            <div
-                id="total"
-                class="total-number">
-                0
-            </div>
+</button>
 
-        </div>
 
-    </div>
+</form>
+
+
+<div
+id="message"
+class="message">
+</div>
+
+
+<a
+class="back-btn"
+href="index.html">
+
+← Back to Building Selection
+
+</a>
 
 </div>
 
 
+
+<!-- RIGHT -->
+
+<div class="card">
+
+<h2>
+Today's Lunch Count
+</h2>
+
+
+<div
+id="teacherList"
+class="teacher-list">
+
+Loading...
+
+</div>
+
+
+<div class="total-box">
+
+<div class="total-label">
+TOTAL LUNCHES
+</div>
+
+<div
+id="total"
+class="total-number">
+
+0
+
+</div>
+
+</div>
+
+</div>
+
+
+</div>
+
+
+
 <script>
 
+
 /* =========================================
-   GOOGLE APPS SCRIPT URL
+   GOOGLE APPS SCRIPT
 ========================================= */
 
 const API_URL =
@@ -290,244 +336,358 @@ const API_URL =
    BUILDING
 ========================================= */
 
-const BUILDING = "Building 1";
-
-
-/* =========================================
-   LOAD TODAY'S DATA
-========================================= */
-
-async function loadData() {
-
-    try {
-
-        const response = await fetch(
-            API_URL +
-            "?building=" +
-            encodeURIComponent(BUILDING)
-        );
-
-        const data = await response.json();
-
-        displayData(data);
-
-    } catch (error) {
-
-        console.error(error);
-
-        document.getElementById("teacherList").innerHTML =
-            "<div style='color:#777;'>No entries yet.</div>";
-
-    }
-
-}
-
-
-/* =========================================
-   DISPLAY DATA
-========================================= */
-
-function displayData(data) {
-
-    const list =
-        document.getElementById("teacherList");
-
-    const totalElement =
-        document.getElementById("total");
-
-    list.innerHTML = "";
-
-    if (!data.entries || data.entries.length === 0) {
-
-        list.innerHTML =
-            "<div style='color:#777;'>No lunch counts submitted yet.</div>";
-
-        totalElement.textContent = "0";
-
-        return;
-    }
-
-
-    let total = 0;
-
-
-    data.entries.forEach(function(entry) {
-
-        total += Number(entry.lunchCount);
-
-
-        const row =
-            document.createElement("div");
-
-        row.className = "teacher-row";
-
-
-        const teacher =
-            document.createElement("span");
-
-        teacher.className = "teacher-name";
-
-        teacher.textContent =
-            entry.teacher;
-
-
-        const count =
-            document.createElement("span");
-
-        count.className = "count";
-
-        count.textContent =
-            entry.lunchCount;
-
-
-        row.appendChild(teacher);
-
-        row.appendChild(count);
-
-        list.appendChild(row);
-
-    });
-
-
-    totalElement.textContent = total;
-
-}
-
-
-/* =========================================
-   SUBMIT FORM
-========================================= */
-
-document
-.getElementById("lunchForm")
-.addEventListener("submit", function(event) {
-
-    event.preventDefault();
-
-
-    const teacher =
-        document
-        .getElementById("teacher")
-        .value
-        .trim();
-
-
-    const lunchCount =
-        document
-        .getElementById("lunchCount")
-        .value
-        .trim();
-
-
-    if (!teacher) {
-
-        alert("Please enter your name.");
-
-        return;
-    }
-
-
-    if (
-        lunchCount === "" ||
-        !/^[0-9]+$/.test(lunchCount)
-    ) {
-
-        alert("Please enter a valid number.");
-
-        return;
-    }
-
-
-    const formData = {
-
-        building: BUILDING,
-
-        teacher: teacher,
-
-        lunchCount: Number(lunchCount)
-
-    };
-
-
-    const message =
-        document.getElementById("message");
-
-
-    message.textContent =
-        "Saving...";
-
-
-    fetch(API_URL, {
-
-        method: "POST",
-
-        mode: "no-cors",
-
-        headers: {
-            "Content-Type": "text/plain;charset=utf-8"
-        },
-
-        body: JSON.stringify(formData)
-
-    })
-    .then(function() {
-
-        message.textContent =
-            "✓ Lunch count saved!";
-
-        document
-        .getElementById("lunchCount")
-        .value = "";
-
-        loadData();
-
-        setTimeout(function() {
-
-            message.textContent = "";
-
-        }, 3000);
-
-    })
-    .catch(function(error) {
-
-        console.error(error);
-
-        message.textContent =
-            "There was an error saving.";
-
-    });
-
-});
-
-
-/* =========================================
-   ONLY ALLOW NUMBERS
-========================================= */
-
-document
-.getElementById("lunchCount")
-.addEventListener("input", function() {
-
-    this.value =
-        this.value.replace(/[^0-9]/g, "");
-
-});
+const BUILDING =
+"Building 1";
 
 
 /* =========================================
    LOAD DATA
 ========================================= */
 
+async function loadData() {
+
+    try {
+
+        const response =
+            await fetch(
+                API_URL +
+                "?building=" +
+                encodeURIComponent(BUILDING) +
+                "&t=" +
+                Date.now()
+            );
+
+
+        const data =
+            await response.json();
+
+
+        if (data.status !== "success") {
+
+            throw new Error(
+                data.message ||
+                "Unable to load data."
+            );
+
+        }
+
+
+        displayData(data.entries);
+
+    }
+
+    catch (error) {
+
+        console.error(error);
+
+        document
+        .getElementById("teacherList")
+        .innerHTML =
+        "<div style='color:#777;'>No entries yet.</div>";
+
+    }
+
+}
+
+
+
+/* =========================================
+   DISPLAY DATA
+========================================= */
+
+function displayData(entries) {
+
+    const list =
+        document.getElementById(
+            "teacherList"
+        );
+
+    const totalElement =
+        document.getElementById(
+            "total"
+        );
+
+
+    list.innerHTML = "";
+
+
+    if (
+        !entries ||
+        entries.length === 0
+    ) {
+
+        list.innerHTML =
+        "<div style='color:#777;'>No lunch counts submitted yet.</div>";
+
+        totalElement.textContent = "0";
+
+        return;
+
+    }
+
+
+    let total = 0;
+
+
+    entries.forEach(function(entry) {
+
+        const count =
+            Number(entry.lunchCount) || 0;
+
+        total += count;
+
+
+        const row =
+            document.createElement(
+                "div"
+            );
+
+        row.className =
+            "teacher-row";
+
+
+        const teacher =
+            document.createElement(
+                "span"
+            );
+
+        teacher.className =
+            "teacher-name";
+
+        teacher.textContent =
+            entry.teacher;
+
+
+        const countElement =
+            document.createElement(
+                "span"
+            );
+
+        countElement.className =
+            "count";
+
+        countElement.textContent =
+            count;
+
+
+        row.appendChild(teacher);
+
+        row.appendChild(countElement);
+
+        list.appendChild(row);
+
+    });
+
+
+    totalElement.textContent =
+        total;
+
+}
+
+
+
+/* =========================================
+   SUBMIT
+========================================= */
+
+document
+.getElementById("lunchForm")
+.addEventListener(
+    "submit",
+    async function(event) {
+
+        event.preventDefault();
+
+
+        const teacher =
+            document
+            .getElementById("teacher")
+            .value
+            .trim();
+
+
+        const lunchCount =
+            document
+            .getElementById("lunchCount")
+            .value
+            .trim();
+
+
+        const message =
+            document
+            .getElementById("message");
+
+
+        const submitBtn =
+            document
+            .getElementById("submitBtn");
+
+
+        if (!teacher) {
+
+            alert(
+                "Please enter your name."
+            );
+
+            return;
+
+        }
+
+
+        if (
+            lunchCount === "" ||
+            !/^[0-9]+$/.test(lunchCount)
+        ) {
+
+            alert(
+                "Please enter a valid number."
+            );
+
+            return;
+
+        }
+
+
+        submitBtn.disabled = true;
+
+        message.textContent =
+            "Saving...";
+
+
+        const formData = {
+
+            building:
+                BUILDING,
+
+            teacher:
+                teacher,
+
+            lunchCount:
+                Number(lunchCount)
+
+        };
+
+
+        try {
+
+            /*
+             * text/plain prevents
+             * unnecessary CORS preflight.
+             */
+
+            await fetch(
+                API_URL,
+                {
+                    method: "POST",
+
+                    mode: "no-cors",
+
+                    headers: {
+                        "Content-Type":
+                        "text/plain;charset=utf-8"
+                    },
+
+                    body:
+                    JSON.stringify(formData)
+                }
+            );
+
+
+            message.textContent =
+                "✓ Lunch count saved!";
+
+
+            document
+            .getElementById("teacher")
+            .value = "";
+
+
+            document
+            .getElementById("lunchCount")
+            .value = "";
+
+
+            /*
+             * Give Google Sheets
+             * a moment to save.
+             */
+
+            setTimeout(
+                loadData,
+                1000
+            );
+
+
+            setTimeout(
+                function() {
+
+                    message.textContent =
+                        "";
+
+                },
+                3000
+            );
+
+        }
+
+        catch (error) {
+
+            console.error(error);
+
+            message.textContent =
+                "There was an error saving.";
+
+        }
+
+
+        submitBtn.disabled = false;
+
+    }
+);
+
+
+
+/* =========================================
+   ONLY NUMBERS
+========================================= */
+
+document
+.getElementById("lunchCount")
+.addEventListener(
+    "input",
+    function() {
+
+        this.value =
+            this.value.replace(
+                /[^0-9]/g,
+                ""
+            );
+
+    }
+);
+
+
+
+/* =========================================
+   INITIAL LOAD
+========================================= */
+
 loadData();
+
 
 
 /* =========================================
    REFRESH EVERY 10 SECONDS
 ========================================= */
 
-setInterval(loadData, 10000);
+setInterval(
+    loadData,
+    10000
+);
 
 </script>
 
+
 </body>
+
 </html>
